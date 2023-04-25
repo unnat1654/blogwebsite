@@ -6,7 +6,6 @@ const username = (jwttoken) => {
             return ;
         }
         else{
-            console.log(token);
             return token.username;
         }
         
