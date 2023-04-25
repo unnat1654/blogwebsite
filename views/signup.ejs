@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Register on UKA Blogs</title>
+</head>
+<body>
+    <form action="/signup" method="post" id="signup-box">
+
+
+
+        <!-- span, icon and input box for Username -->
+        <span class="titlespan" id="sign-username-span">Enter Username</span>
+        <div class="user-email-error-box <%= username_taken %>">
+            Username <br>might already be in use....
+        </div>
+        <br>
+        <div class="rectangle">
+            <i class="fa fa-user-o" style="font-size: 24px; margin:-3px; color:blueviolet;"></i>
+            <input type="text" name="username" id="sign-username-input" placeholder="Username" required>
+        </div>
+        
+        <br>
+        <br>
+        <span class="titlespan" id="sign-email-span">Enter Email</span>
+        <div class="user-email-error-box <%= username_taken %>">
+            Email <br>might already be in use....
+        </div>
+        <br>
+        <div class="rectangle">
+            <i class="fa fa-user-o" style="font-size: 24px; margin:-3px; color:blueviolet;"></i>
+            <input type="email" name="email" id="sign-email-input" placeholder="E-Mail" required>
+        </div>
+        
+        <br>
+        <br>
+
+        
+        <!-- span, icon and input box for Password -->
+        <span class="titlespan" id="sign-password-span">Enter Password</span>
+        <br>
+        <div class="rectangle">
+            <i class="fa fa-lock" style="font-size: 24px; margin:-3px; color:blueviolet;"></i>
+            <input type="password" name="password" id="sign-password-input" placeholder="Password" required>
+
+            <!-- button for hiding password-->
+            <button id="sign-showpassword-button" onmousedown="showpass()" onmouseup="hidepass()"><i class="fa fa-eye-slash" style="color:rgb(98, 30, 162);"></i></button>
+        </div>
+        
+        <br>
+        <br>
+
+
+
+        <!-- submit button for the form -->
+        <button type="submit" name="submit" id="sign-submit-button">Register</button>
+    </form>
+    <!-- panda GIF for decoration -->
+    <img src="resources/cow.gif" id="cow">  
+    
+    <script>
+        //button for showing password in login page
+        let eye_button = document.getElementById("sign-showpassword-button");
+        let password = document.getElementById("sign-password-input");
+        function showpass() {
+            if (password.value != "") {
+                eye_button.innerHTML = `<i class="fa fa-eye" style="color:rgb(98, 30, 162);"></i>`;
+                password.type = 'text';
+            }
+        }
+        function hidepass() {
+            eye_button.innerHTML = `<i class="fa fa-eye-slash" style="color:rgb(98, 30, 162);"></i>`;
+            password.type = 'password';
+        }
+    </script>
+</body>
+</html>

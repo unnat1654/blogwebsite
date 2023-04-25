@@ -1,0 +1,66 @@
+body{
+    background-color: rgb(254, 255, 214);
+    margin:0px;
+}
+form{
+    margin-top:10vh;
+    margin-left:10vw;
+    padding:50px;
+    height: 300px;
+    width: 400px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+span{
+    font-family: 'Century Gothic';
+    font-size:large;
+    color: #3b9f58;
+}
+.rectangle{
+    width: 250px;
+    border-width: 0px 0px 1.5px 0px;
+    border-color: blueviolet;
+    border-style: solid;
+    margin: 5px;
+    padding:5px;
+
+}
+*:focus{
+    outline: none;
+}
+input{
+    border-width: 0px;
+    height: 30px;
+    padding-left: 10px;
+    margin-bottom: 2px;
+    font-size:15px;
+    background-color: rgb(254, 255, 214);
+}
+#subbutton{
+    width:200px;
+    position: relative;
+    border-radius: 40px;
+    background-color: rgb(121 68 221 / 83%);
+    color: rgb(38 255 41);
+    font-size:15px;
+    font-weight: bold;
+    padding:20px;
+    border-width:0px;
+    left:20px;
+}
+#showpassword-button{
+    border-width:0px;
+    background-color: rgba(255, 255, 255, 0);
+}
+@media (max-width: 500px) {
+    #panda{
+        display:none;
+    }
+}
+@media (min-width: 1100px) {
+    #racoon{
+        position: absolute;
+        left:670px;
+        top: 10px;
+        height: 500px;
+    }
+}

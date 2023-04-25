@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Login</title>
+</head>
+<body>
+     <!-- form for login page -->
+     <form action="/login" method="post" id="login-box">
+
+
+
+        <!-- span, icon and input box for Username -->
+        <span class="titlespan" id="login-username-span">Enter Username</span>
+        <div class="user-pass-error-box <%= username_check %>">
+            Username Doesn't Exist, Please Try Again
+        </div>
+        <br>
+        <div class="rectangle">
+            <i class="fa fa-user-o" style="font-size: 24px; margin:-3px; color:blueviolet;"></i>
+            <input type="text" name="username" id="login-username-input" placeholder="Username" required>
+        </div>
+        <br>
+        <br>
+
+        
+        <!-- span, icon and input box for Password -->
+        <span class="titlespan" id="login-password-span">Enter Password</span>
+        <div class="user-pass-error-box <%= password_check %>">
+            Password Is Wrong, Please Try Again!
+        </div>
+        <br>
+        <div class="rectangle">
+            <i class="fa fa-lock" style="font-size: 24px; margin:-3px; color:blueviolet;"></i>
+            <input type="password" name="password" id="login-password-input" placeholder="Password" required>
+
+            <!-- button for hiding password-->
+            <button id="login-showpassword-button" type="button" onmousedown="showpass()" onmouseup="hidepass()"><i class="fa fa-eye-slash" style="color:rgb(98, 30, 162);"></i></button>
+        </div>
+        <br>
+        <br>
+
+
+
+        <!-- submit button for the form -->
+        <button type="submit" name="submit" id="login-submit-button">LOG IN</button>
+    </form>
+
+
+    
+    <!-- panda GIF for decoration -->
+    <img src="resources/panda.gif" id="panda">  
+    
+    <script>
+        //button for showing password in login page
+        let eye_button = document.getElementById("login-showpassword-button");
+        let password = document.getElementById("login-password-input");
+        function showpass() {
+            if (password.value != "") {
+                eye_button.innerHTML = `<i class="fa fa-eye" style="color:rgb(98, 30, 162);"></i>`;
+                password.type = 'text';
+            }
+        }
+        function hidepass() {
+            eye_button.innerHTML = `<i class="fa fa-eye-slash" style="color:rgb(98, 30, 162);"></i>`;
+            password.type = 'password';
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,84 @@
+body{
+    background-color: #1abc9c;
+    margin:0px;
+}
+#signup-box{
+    margin-top:5vh;
+    margin-left:10vw;
+    padding:50px;
+    height: 400px;
+    width: 400px;
+    background-color: #85dc8cd0;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+.titlespan{
+    font-family: 'Century Gothic';
+    font-size:large;
+    color: #ffffff;
+}
+.rectangle{
+    width: 250px;
+    border-width: 0px 0px 1.5px 0px;
+    border-color: blueviolet;
+    border-style: solid;
+    margin: 5px;
+    padding:5px;
+
+}
+*:focus{
+    outline: none;
+}
+.user-email-error-box{
+    border-width: 2px;
+    border-color: yellow;
+    border-style:solid;
+    width: 100px;
+    position:absolute;
+    left: 95vw;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.userEmailNotTaken{
+    display:none;
+}
+#sign-username-input,#sign-password-input,#sign-email-input{
+    border-width: 0px;
+    height: 30px;
+    padding-left: 10px;
+    margin-bottom: 2px;
+    font-size:15px;
+    background-color: inherit;
+}
+#sign-submit-button{
+    width:150px;
+    position: relative;
+    border-radius: 40px;
+    background-color: rgb(121 68 221 / 83%);
+    color: rgb(38 255 41);
+    font-size:15px;
+    font-size: 18px;
+    padding:15px;
+    border-width:0px;
+    left:180px;
+}
+#sign-showpassword-button{
+    border-width:0px;
+    background-color: rgba(255, 255, 255, 0);
+}
+@media (max-width: 500px) {
+    #cow{
+        display:none;
+    }
+    .user-email-error-box{
+        left: 98vw;
+    }
+}
+@media (min-width: 1100px) {
+    #cow{
+        position: absolute;
+        left:700px;
+        top:20px;
+    }
+    .user-email-error-box{
+        left: 470px;
+    }
+}
