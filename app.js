@@ -1,37 +1,51 @@
-//jshint esversion:6
 
+//calling express and creating app, resources are stored inn public folder
 const express = require("express");
 const app = express();
 app.use(express.json());
-
-
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+//calling body-parser and using it in program
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
 
+
+//calling template engine ejs
 const ejs = require("ejs");
 app.set('view engine', 'ejs');
 
+//calling bcrypt for password encryption
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-
-
+//calling mongodb database, dbcall.mongocall(collection_name) returns collection
 const dbcall = require(__dirname + "/mongocall.js");
 
+//calling lodash for string manipulation
 const _ = require("lodash");
+
+//calling cookie-parser and jwt for sessioning
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
+app.use(cookieParser());
+const verification = require(__dirname + "/authsess.js");
+
 app.get("/", (req, res) => {
+  
   res.redirect("/home");
+
 });
 app.get("/home", (req, res) => {
-  res.render("home");
+  if(verification(req.cookies.token)){res.render("home", {NotLoggedIn: "hide-element", LoggedIn: ""});}
+  else{res.render("home", {NotLoggedIn: "", LoggedIn: "hide-element"});}
 });
 app.get("/compose", (req, res) => {
-  res.render("compose");
+  if(verification(req.cookies.token)){res.render("compose", {NotLoggedIn: "hide-element", LoggedIn: ""});}
+  else{res.render("compose", {NotLoggedIn: "", LoggedIn: "hide-element"});}
 });
 app.get("/signup", (req, res) => {
   res.render("signup", { username_taken: "userEmailNotTaken" });
+
 });
 app.get("/login", (req, res) => {
   res.render("login", {username_check: "user-exists",password_check: "password-right" });
@@ -39,9 +53,16 @@ app.get("/login", (req, res) => {
 app.get("/:pagename", async (req, res) => {
   const pagetitle = _.lowerCase(req.params.pagename);
   const mongocall = await dbcall.mongocall("titlencontent");
-  mongocall.find({ title: pagetitle }).toArray().then((blogcontentarray) => { res.render("post", { blogTitle: blogcontentarray[0]?.title, blogContent: blogcontentarray[0]?.content }); });
+  mongocall.find({ title: pagetitle }).toArray().then((blogcontentarray) => { 
+    if(verification(req.cookies.token)){ 
+      res.render("post", {NotLoggedIn: "hide-element", LoggedIn: "", blogTitle: blogcontentarray[0]?.title, blogContent: blogcontentarray[0]?.content });
+    } 
+    else{
+      res.render("post", {NotLoggedIn: "", LoggedIn: "hide-element", blogTitle: blogcontentarray[0]?.title, blogContent: blogcontentarray[0]?.content });}
+  });
 });
 app.post("/signup", async (req, res) => {
+  
   const users_and_their_data = await dbcall.mongocall("users_and_their_data");
   const user_table = await users_and_their_data.findOne({ username: req.body.username });
   const mail_table = await users_and_their_data.findOne({ email: req.body.email });
@@ -57,6 +78,12 @@ app.post("/signup", async (req, res) => {
         "password": hash
       });
     });
+    const jwt_content ={username: req.body.username, email: req.body.email};
+    console.log(jwt_content)
+    const jwttoken =jwt.sign(jwt_content, 'secret', { expiresIn: '1h' });
+    res.cookie('token', jwttoken, {maxAge: 3600000});
+
+    res.redirect("/home");
   }
 });
 app.post("/login", async (req, res) => {

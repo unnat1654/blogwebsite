@@ -5,6 +5,11 @@
   <meta charset="utf-8">
   <title>UKA blogs</title>
   <meta charset="utf-8">
+  <style>
+  .hide-element{
+    display: none;
+  }
+  </style>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,13 +20,31 @@
         <p class="navbar-brand">UKA BLOGS</p>
       </div>
         <ul class="nav navbar-nav navbar-right">
-          <!-- 6 -->
-          <li class="nav-item" id="home"><a href="/">HOME</a></li>
-          <li class="nav-item" id="about"><a href="/about">ABOUT US</a></li>
-          <li class="nav-item" id="contact"><a href="/contact">CONTACT US</a></li>
+          <li class="nav-item" id="home">
+            <a href="/">HOME</a>
+          </li>
+          <li class="nav-item" id="about">
+            <a href="/about">ABOUT US</a>
+          </li>
+          <li class="nav-item" id="contact">
+            <a href="/contact">CONTACT US</a>
+          </li>
+          <li class="nav-item <%=NotLoggedIn%>">
+            <a id="signup" href="/signup">SIGN UP</a>
+          </li>
+          <li class="nav-item <%=NotLoggedIn%>" id="login">
+            <a href="/login">LOG IN</a>
+          </li>
+          <li class="nav-item <%=LoggedIn%>" id="profile_picture">
+            <button id="dp_button">
+              <i class='fa fa-user' style='font-size:36px;'></i>
+            </button>
+          </li>
         </ul>
+        
     </div>
   </nav>
+
 
   <body>
     <div class="container">

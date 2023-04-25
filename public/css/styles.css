@@ -15,7 +15,38 @@
 .navbar-nav  li a:hover {
     color: #1abc9c !important;
 }
+#signup, #login{
+    letter-spacing: 2px;
+    font-size: 11px;
+    font-weight: bold;
+}
+#signup{
+    padding-bottom: 3px;
+    border-bottom: 2px solid rgb(80, 91, 193);
+}
+#signup:hover{
+    border-bottom: 2px solid rgb(80, 193, 123);
+}
+#login{
+    position: relative;
+    right: 0px;
 
+}
+#profile_picture{
+    background-color: rgb(34, 165, 65);
+    padding: 10px;
+    border-radius: 100%;
+}
+#profile_picture:hover{
+    background-color: rgba(34, 165, 65, 0.835);
+}
+#dp_button {
+    border-width: 0px;
+    background-color: rgba(255, 255, 255, 0);
+}
+.hide-element {
+    display: none !important; 
+}
 .footer-padding {
 	padding-bottom: 60px;
 }
@@ -76,4 +107,24 @@
     margin: 10px;
     position: relative;
     top:-6px;
+}
+@media (max-width: 400px) {
+    .navbar-nav{
+        display:none;
+    }
+}
+@media (min-width: 760px) {
+    #login{
+        position: relative;
+        right: 0px;
+    }
+    
+}
+
+@media (min-width: 1100px) {
+    #login{
+        position: relative;
+        right: 0px;
+    }
+
 }
