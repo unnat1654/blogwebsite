@@ -1,10 +1,12 @@
+require("dotenv").config();
+
 const mongodb = require("mongodb");
-const url= "mongodb+srv://devolopkingbro:XRO1k8cSHFJPj8bM@cluster0.gresqe3.mongodb.net/test";
+const url= process.env.mongourl;
 const client = new mongodb.MongoClient(url);
 
 const mongocall = async (collection)=> {
     const result = await client.connect();
-    const db = result.db("blogweb");
+    const db = result.db(process.env.dbname);
     return db.collection(collection);
 }
 module.exports.mongocall = mongocall;

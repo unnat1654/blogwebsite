@@ -37,6 +37,7 @@
     padding: 10px;
     border-radius: 100%;
     z-index: 3;
+    display: inline-block;
 }
 #profile_picture:hover{
     background-color: rgba(34, 165, 65, 0.835);

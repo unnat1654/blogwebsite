@@ -1,3 +1,5 @@
+//calling env for security
+require("dotenv").config();
 
 //calling express and creating app, resources are stored inn public folder
 const express = require("express");
@@ -60,8 +62,8 @@ app.get("/login", (req, res) => {
 });
 app.get("/:pagename", async (req, res) => {
   const pagetitle = _.lowerCase(req.params.pagename);
-  const mongocall = await dbcall.mongocall("titlencontent");
-  const users_and_their_data = await dbcall.mongocall("users_and_their_data");
+  const mongocall = await dbcall.mongocall(process.env.collection1);
+  const users_and_their_data = await dbcall.mongocall(process.env.collection2);
   const liked_Status = await users_and_their_data.findOne({liked: {$all: [pagetitle]}});
   if(!liked_Status){
     var liked_btn = "unliked";
@@ -75,7 +77,7 @@ app.get("/:pagename", async (req, res) => {
 });
 app.post("/signup", async (req, res) => {
 
-  const users_and_their_data = await dbcall.mongocall("users_and_their_data");
+  const users_and_their_data = await dbcall.mongocall(process.env.collection2);
   const user_table = await users_and_their_data.findOne({ username: req.body.username });
   const mail_table = await users_and_their_data.findOne({ email: req.body.email });
   if (user_table || mail_table) {
@@ -91,14 +93,14 @@ app.post("/signup", async (req, res) => {
       });
     });
     const jwt_content = { username: req.body.username, email: req.body.email };
-    const jwttoken = jwt.sign(jwt_content, 'secret', { expiresIn: '1h' });
-    res.cookie('token', jwttoken, { maxAge: 3600000 });
+    const jwttoken = jwt.sign(jwt_content, process.env.key, { expiresIn: '30d' });
+    res.cookie('token', jwttoken, { maxAge: 2592000000 });
 
     res.redirect("/home");
   }
 });
 app.post("/login", async (req, res) => {
-  const users_and_their_data = await dbcall.mongocall("users_and_their_data");
+  const users_and_their_data = await dbcall.mongocall(process.env.collection2);
   const user_table = await users_and_their_data.findOne({ username: req.body.username });
 
   if (user_table) {
@@ -109,13 +111,12 @@ app.post("/login", async (req, res) => {
       //in case password is true
       else if (result == true) {
         const jwt_content = { username: req.body.username, email: user_table.email };
-        const jwttoken = jwt.sign(jwt_content, 'secret', { expiresIn: '1h' });
-        res.cookie('token', jwttoken, { maxAge: 3600000 });
+        const jwttoken = jwt.sign(jwt_content, process.env.key, { expiresIn: '30d' });
+        res.cookie('token', jwttoken, { maxAge: 2592000000 });
         res.redirect("/home");
       }
       //in case password is false
       else if (result == false) {
-        console.log(req.body.password);
         res.render("login", { username_check: "user-exists", password_check: "password-wrong" });
       }
 
@@ -126,7 +127,7 @@ app.post("/login", async (req, res) => {
   }
 });
 app.post("/compose", async (req, res) => {
-  const mongocall = await dbcall.mongocall("titlencontent");
+  const mongocall = await dbcall.mongocall(process.env.collection1);
   const pagetitle = _.lowerCase(req.body.postTitle);
   mongocall.insertOne({
     title: pagetitle,
@@ -139,8 +140,7 @@ app.post("/logout", async (req,res)=> {
   res.redirect(req.get('referer'));
 })
 app.put("/like", async (req, res) => {
-  console.log(req.body);
-  const users_and_their_data = await dbcall.mongocall("users_and_their_data");
+  const users_and_their_data = await dbcall.mongocall(process.env.collection2);
   const query = { username: verification(req.cookies.token) };
   const updateDocument = {
     $push: {"liked": req.body.like_this_blog}
@@ -148,8 +148,7 @@ app.put("/like", async (req, res) => {
   const result = await users_and_their_data.updateOne(query, updateDocument);
 });
 app.put("/unlike", async (req, res) => {
-  console.log(req.body);
-  const users_and_their_data = await dbcall.mongocall("users_and_their_data");
+  const users_and_their_data = await dbcall.mongocall(process.env.collection2);
   const query = { username: verification(req.cookies.token) };
   const updateDocument = {
     $pull: {"liked": req.body.unlike_this_blog}
