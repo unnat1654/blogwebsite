@@ -43,7 +43,7 @@ app.get("/compose", (req, res) => {
 });
 app.get("/signup", (req, res) => {
   if(verification(req.cookies.token)) {
-    res.redirect("/");
+    res.redirect('back');
   }
   else {
     res.render("signup", { username_taken: "userEmailNotTaken" });
@@ -52,7 +52,7 @@ app.get("/signup", (req, res) => {
 });
 app.get("/login", (req, res) => {
   if(verification(req.cookies.token)) {
-    res.redirect("/");
+    res.redirect('back');
   }
   else {
     res.render("login", { username_check: "user-exists", password_check: "password-right" });
@@ -61,8 +61,16 @@ app.get("/login", (req, res) => {
 app.get("/:pagename", async (req, res) => {
   const pagetitle = _.lowerCase(req.params.pagename);
   const mongocall = await dbcall.mongocall("titlencontent");
+  const users_and_their_data = await dbcall.mongocall("users_and_their_data");
+  const liked_Status = await users_and_their_data.findOne({liked: {$all: [pagetitle]}});
+  if(!liked_Status){
+    var liked_btn = "unliked";
+  }
+  else{
+    var liked_btn = "liked";
+  }
   mongocall.find({ title: pagetitle }).toArray().then((blogcontentarray) => {
-    res.render("post", { username: verification(req.cookies.token), blogTitle: blogcontentarray[0]?.title, blogContent: blogcontentarray[0]?.content });
+    res.render("post", { username: verification(req.cookies.token),liked_btn: liked_btn, blogTitle: blogcontentarray[0]?.title, blogContent: blogcontentarray[0]?.content });
   });
 });
 app.post("/signup", async (req, res) => {
@@ -126,11 +134,29 @@ app.post("/compose", async (req, res) => {
   });
   res.redirect("/");
 });
-app.post("/like", async (req, res) => {
+app.post("/logout", async (req,res)=> {
+  res.clearCookie('token');
+  res.redirect(req.get('referer'));
+})
+app.put("/like", async (req, res) => {
   console.log(req.body);
+  const users_and_their_data = await dbcall.mongocall("users_and_their_data");
+  const query = { username: verification(req.cookies.token) };
+  const updateDocument = {
+    $push: {"liked": req.body.like_this_blog}
+  }
+  const result = await users_and_their_data.updateOne(query, updateDocument);
 });
-app.post("/unlike", async (req, res) => {
+app.put("/unlike", async (req, res) => {
   console.log(req.body);
+  const users_and_their_data = await dbcall.mongocall("users_and_their_data");
+  const query = { username: verification(req.cookies.token) };
+  const updateDocument = {
+    $pull: {"liked": req.body.unlike_this_blog}
+  }
+  const result = await users_and_their_data.updateOne(query, updateDocument);
 });
+
+
 
 app.listen(3000);

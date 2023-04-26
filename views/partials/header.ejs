@@ -39,19 +39,24 @@
         
     </div>
   </nav>
-  <div id="infostore"><%= username %></div>
-  <span id="logoutBox">
-    <br>
-    <h5>USERNAME:</h5>
-    <h5>&nbsp;&nbsp;&nbsp;<%= username %> </h5>
-    <br>
-    <br>
-    <br>
-    <button id="signout">Sign out</button>
-    <br>
-    <br>
-  </span>
-
+  
+  
 
   <body>
+    <span id="logoutBox">
+      <br>
+      <h5>&nbsp;&nbsp;&nbsp;USERNAME:</h5>
+      <h5>&nbsp;&nbsp;&nbsp;<%= username %> </h5>
+      <br>
+      <br>
+      <br>
+      <form method = "post" action="/logout">
+        <button type="Submit"id="signout">Sign out</button>
+      </form>
+      <br>
+      <br>
+    </span>
+    <div id="infostore"><%= username %></div>
+    
     <div class="container">
+      

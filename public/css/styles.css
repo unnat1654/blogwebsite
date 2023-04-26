@@ -49,15 +49,15 @@
     display: none !important; 
 }
 #logoutBox{
-    border: 2px solid rgb(129, 109, 139);
     width: 300px;
     position: absolute;
-    top:10px;
+    top:0px;
     right: 20px;
-    background-color: rgba(196, 100, 100);
+    background-color: rgb(238, 178, 178);
     z-index: 2;
-    border-radius: 10%;
     overflow: hidden;
+    border-radius: 0px 0px 3px 3px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 h5{
     font-size: larger;
@@ -68,7 +68,9 @@ h5{
     width: 100px;
     height: 40px;
     position: relative;
-    left: 20%;
+    left: 60%;
+    border:1px solid rgb(34, 165, 65);
+    border-radius: 20px;
 }
 
 .footer-padding {

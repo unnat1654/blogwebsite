@@ -1,25 +1,25 @@
 <%-include("partials/header");%>
-    <h1>Compose</h1>
-    <form method="post" action="/compose">
-        <div class="form-group">
-          <label for="composeTitle">Title</label>
-          <input type="text" name="postTitle" class="form-control" id="composeTitle">
-        </div>
-        <div class="form-group">
-          <label for="composeContent">Post</label>
-          <br>
-          <div id="compose-button-panel">
-            <button type="button" class="compose-buttons" onclick="add_bold()"><b>B</b></button>
-            <button type="button" class="compose-buttons" onclick="add_italic()"><i>I</i></button>
-            <button type="button" class="compose-buttons" onclick="add_underline()"><u>U</u></button>
-            <button type="button" class="compose-buttons" onclick="add_strike()"><s>ABC</s></button>
-            <span id="right-border"></span>
-            <button type="button" class="compose-buttons" onclick="add_ul()">	<i class="fa fa-list-ul"></i></button>
-            <button type="button" class="compose-buttons" onclick="add_ol()">	<i class="fa fa-list-ol"></i></button>
-          </div>
-          <textarea class="form-control" id="composeContent" name="postBody" rows="5" cols="10"></textarea>
-        </div>
-        <button type="submit" name="submitcomposed" class="btn btn-primary">Publish</button>
-      </form>
-      <script src="js/compose.js"></script>
+<h1>Compose</h1>
+<form method="post" action="/compose">
+  <div class="form-group">
+    <label for="composeTitle">Title</label>
+    <input type="text" name="postTitle" class="form-control" id="composeTitle">
+  </div>
+  <div class="form-group">
+    <label for="composeContent">Post</label>
+    <br>
+    <div id="compose-button-panel">
+      <button type="button" class="compose-buttons" onclick="add_bold()"><b>B</b></button>
+      <button type="button" class="compose-buttons" onclick="add_italic()"><i>I</i></button>
+      <button type="button" class="compose-buttons" onclick="add_underline()"><u>U</u></button>
+      <button type="button" class="compose-buttons" onclick="add_strike()"><s>ABC</s></button>
+      <span id="right-border"></span>
+      <button type="button" class="compose-buttons" onclick="add_ul()">	<i class="fa fa-list-ul"></i></button>
+      <button type="button" class="compose-buttons" onclick="add_ol()">	<i class="fa fa-list-ol"></i></button>
+    </div>
+    <textarea class="form-control" id="composeContent" name="postBody" rows="5" cols="10"></textarea>
+  </div>
+  <button type="submit" name="submitcomposed" class="btn btn-primary">Publish</button>
+</form>
+<script src="js/compose.js"></script>
 <%-include("partials/footer");%>

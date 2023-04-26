@@ -21,7 +21,7 @@
         <br>
         <div class="rectangle">
             <i class="fa fa-user-o" style="font-size: 24px; margin:-3px; color:blueviolet;"></i>
-            <input type="text" name="username" id="sign-username-input" placeholder="Username" required>
+            <input type="text" name="username" id="sign-username-input" maxlength="20" placeholder="Username" required>
         </div>
         
         <br>
@@ -33,7 +33,7 @@
         <br>
         <div class="rectangle">
             <i class="fa fa-user-o" style="font-size: 24px; margin:-3px; color:blueviolet;"></i>
-            <input type="email" name="email" id="sign-email-input" placeholder="E-Mail" required>
+            <input type="email" name="email" id="sign-email-input" maxlength="50" placeholder="E-Mail" required>
         </div>
         
         <br>
@@ -45,7 +45,7 @@
         <br>
         <div class="rectangle">
             <i class="fa fa-lock" style="font-size: 24px; margin:-3px; color:blueviolet;"></i>
-            <input type="password" name="password" id="sign-password-input" placeholder="Password" required>
+            <input type="password" name="password" id="sign-password-input" maxlength="20" placeholder="Password" required>
 
             <!-- button for hiding password-->
             <button id="sign-showpassword-button" onmousedown="showpass()" onmouseup="hidepass()"><i class="fa fa-eye-slash" style="color:rgb(98, 30, 162);"></i></button>
